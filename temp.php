@@ -1,86 +1,100 @@
 <?php 
-define('BR', "<br>\n");
-date_default_timezone_set("Europe/Rome");
-//$oggi = (new \DateTime())->format('Y-m-d H:i:s');
+
+class Settimana {
+    
+    public $lunedi;
+    public $martedi;
+    public $mercoledi;
+    public $giovedi;
+    public $venerdi;
+    public $sabato;
+    public $domenica;
+
+    public $giorno;
+    public $giornoSettimana;
+
+    public function __construct($giorno) {
+        date_default_timezone_set("Europe/Rome");
+        $this->giorno = $giorno;
+
+        $giorno_settimana_numero = $this->giorno->format('N');    
+        switch($giorno_settimana_numero) {
+            case 1: $giorno_settimana = 'Lunedì'; break;
+            case 2: $giorno_settimana = 'Martedì'; break;
+            case 3: $giorno_settimana = 'Mercoledì'; break;
+            case 4: $giorno_settimana = 'Giovedì'; break;
+            case 5: $giorno_settimana = 'Venerdì'; break;
+            case 6: $giorno_settimana = 'Sabato'; break;
+            case 7: $giorno_settimana = 'Domenica'; break;
+            default: $giorno_settimana = '-';
+        }
+
+        $this->giornoSettimana = $giorno_settimana;
+
+        $differenzagiornilunedi = $giorno_settimana_numero - 1;
+        $this->lunedi = clone $this->giorno;
+        $this->lunedi->sub(new DateInterval("P".$differenzagiornilunedi."D"));
+
+        $this->martedi = clone $this->giorno;
+        $differenzagiornimartedi = $giorno_settimana_numero - 2;
+        if($differenzagiornimartedi >=0) {
+            $this->martedi->sub(new DateInterval("P".$differenzagiornimartedi."D"));
+        } else {
+            $this->martedi->add(new DateInterval("P".abs($differenzagiornimartedi)."D"));
+        }
+
+        $this->mercoledi = clone $this->giorno;
+        $differenzagiornimercoledi = $giorno_settimana_numero - 3;
+        if($differenzagiornimercoledi >=0) {
+            $this->mercoledi->sub(new DateInterval("P".$differenzagiornimercoledi."D"));
+        } else {
+            $this->mercoledi->add(new DateInterval("P".abs($differenzagiornimercoledi)."D"));
+        }
+
+        $this->giovedi = clone $this->giorno;
+        $differenzagiornigiovedi = $giorno_settimana_numero - 4;
+        if($differenzagiornigiovedi >=0) {
+            $this->giovedi->sub(new DateInterval("P".$differenzagiornigiovedi."D"));
+        } else {
+            $this->giovedi->add(new DateInterval("P".abs($differenzagiornigiovedi)."D"));
+        }
+
+        $this->venerdi = clone $this->giorno;
+        $differenzagiornivenerdi = $giorno_settimana_numero - 5;
+        if($differenzagiornivenerdi >=0) {
+            $this->venerdi->sub(new DateInterval("P".$differenzagiornivenerdi."D"));
+        } else {
+            $this->venerdi->add(new DateInterval("P".abs($differenzagiornivenerdi)."D"));
+        }
+
+        $this->sabato = clone $this->giorno;
+        $differenzagiornisabato = $giorno_settimana_numero - 6;
+        if($differenzagiornisabato >=0) {
+            $this->sabato->sub(new DateInterval("P".$differenzagiornisabato."D"));
+        } else {
+            $this->sabato->add(new DateInterval("P".abs($differenzagiornisabato)."D"));
+        }
+
+        $this->domenica = clone $this->giorno;
+        $differenzagiornidomenica = $giorno_settimana_numero - 7;
+        if($differenzagiornidomenica >=0) {
+            $this->domenica->sub(new DateInterval("P".$differenzagiornidomenica."D"));
+        } else {
+            $this->domenica->add(new DateInterval("P".abs($differenzagiornidomenica)."D"));
+        }        
+    }
+}
+
 $oggi = new \DateTime();
+//$oggi = new \DateTime('2017-12-31');
 
-// Se devo fissare una data per test
-$oggi = new \DateTime("2018-03-01 10:00:00");
+$settimana = new Settimana($oggi);
 
-$oggi_settimana_numero = $oggi->format('N');
-
-switch($oggi_settimana_numero) {
-    case 1: $oggi_settimana = 'Lunedì'; break;
-    case 2: $oggi_settimana = 'Martedì'; break;
-    case 3: $oggi_settimana = 'Mercoledì'; break;
-    case 4: $oggi_settimana = 'Giovedì'; break;
-    case 5: $oggi_settimana = 'Venerdì'; break;
-    case 6: $oggi_settimana = 'Sabato'; break;
-    case 7: $oggi_settimana = 'Domenica'; break;
-    default: $oggi_settimana = '-';
-}
-
-echo "Oggi: ".$oggi->format('Y-m-d H:i:s').BR;
-echo "Oggi è il giorno: ".$oggi_settimana.BR;
-
-// per cui se ad esempio oggi è 3 (mer) per arrivare a lunedì devo andare indietro di 2 giorni
-$differenzagiornilunedi = $oggi_settimana_numero - 1;
-$lunedi = clone $oggi;
-$lunedi->sub(new DateInterval("P".$differenzagiornilunedi."D"));
-
-$martedi = clone $oggi;
-$differenzagiornimartedi = $oggi_settimana_numero - 2;
-if($differenzagiornimartedi >=0) {
-    $martedi->sub(new DateInterval("P".$differenzagiornimartedi."D"));
-} else {
-    $martedi->add(new DateInterval("P".abs($differenzagiornimartedi)."D"));
-}
-
-$mercoledi = clone $oggi;
-$differenzagiornimercoledi = $oggi_settimana_numero - 3;
-if($differenzagiornimercoledi >=0) {
-    $mercoledi->sub(new DateInterval("P".$differenzagiornimercoledi."D"));
-} else {
-    $mercoledi->add(new DateInterval("P".abs($differenzagiornimercoledi)."D"));
-}
-
-$giovedi = clone $oggi;
-$differenzagiornigiovedi = $oggi_settimana_numero - 4;
-if($differenzagiornigiovedi >=0) {
-    $giovedi->sub(new DateInterval("P".$differenzagiornigiovedi."D"));
-} else {
-    $giovedi->add(new DateInterval("P".abs($differenzagiornigiovedi)."D"));
-}
-
-$venerdi = clone $oggi;
-$differenzagiornivenerdi = $oggi_settimana_numero - 5;
-if($differenzagiornivenerdi >=0) {
-    $venerdi->sub(new DateInterval("P".$differenzagiornivenerdi."D"));
-} else {
-    $venerdi->add(new DateInterval("P".abs($differenzagiornivenerdi)."D"));
-}
-
-$sabato = clone $oggi;
-$differenzagiornisabato = $oggi_settimana_numero - 6;
-if($differenzagiornisabato >=0) {
-    $sabato->sub(new DateInterval("P".$differenzagiornisabato."D"));
-} else {
-    $sabato->add(new DateInterval("P".abs($differenzagiornisabato)."D"));
-}
-
-$domenica = clone $oggi;
-$differenzagiornidomenica = $oggi_settimana_numero - 7;
-if($differenzagiornidomenica >=0) {
-    $domenica->sub(new DateInterval("P".$differenzagiornidomenica."D"));
-} else {
-    $domenica->add(new DateInterval("P".abs($differenzagiornidomenica)."D"));
-}
-
-
-echo "Il lunedì è: ".$lunedi->format('Y-m-d').BR;
-echo "Il martedì è: ".$martedi->format('Y-m-d').BR;
-echo "Il mercoledì è: ".$mercoledi->format('Y-m-d').BR;
-echo "Il giovedì è: ".$giovedi->format('Y-m-d').BR;
-echo "Il venerdì è: ".$venerdi->format('Y-m-d').BR;
-echo "Il sabato è: ".$sabato->format('Y-m-d').BR;
-echo "La domenica è: ".$domenica->format('Y-m-d').BR;
+define('BR', "<br>\n");
+echo "Il lunedì è: ".$settimana->lunedi->format('d/m/Y').BR;
+echo "Il martedì è: ".$settimana->martedi->format('d/m/Y').BR;
+echo "Il mercoledì è: ".$settimana->mercoledi->format('d/m/Y').BR;
+echo "Il giovedì è: ".$settimana->giovedi->format('d/m/Y').BR;
+echo "Il venerdì è: ".$settimana->venerdi->format('d/m/Y').BR;
+echo "Il sabato è: ".$settimana->sabato->format('d/m/Y').BR;
+echo "La domenica è: ".$settimana->domenica->format('d/m/Y').BR;
