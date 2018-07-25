@@ -2,6 +2,9 @@
 
 class Settimana {
     
+    public $lunediPrecedente;
+    public $lunediSuccessivo;
+
     public $lunedi;
     public $martedi;
     public $mercoledi;
@@ -13,9 +16,14 @@ class Settimana {
     public $giorno;
     public $giornoSettimana;
 
-    public function __construct($giorno) {
+    public function __construct($giorno = null) {
         date_default_timezone_set("Europe/Rome");
-        $this->giorno = $giorno;
+        
+        if(is_null($giorno)) {
+            $this->giorno = new \Datetime();
+        } else {
+            $this->giorno = $giorno;
+        }
 
         $giorno_settimana_numero = $this->giorno->format('N');    
         switch($giorno_settimana_numero) {
@@ -34,6 +42,12 @@ class Settimana {
         $differenzagiornilunedi = $giorno_settimana_numero - 1;
         $this->lunedi = clone $this->giorno;
         $this->lunedi->sub(new DateInterval("P".$differenzagiornilunedi."D"));
+
+        $this->lunediPrecedente = clone $this->lunedi;
+        $this->lunediPrecedente->sub(new DateInterval("P7D"));
+
+        $this->lunediSuccessivo = clone $this->lunedi;
+        $this->lunediSuccessivo->add(new DateInterval("P7D"));
 
         $this->martedi = clone $this->giorno;
         $differenzagiornimartedi = $giorno_settimana_numero - 2;
@@ -85,10 +99,16 @@ class Settimana {
     }
 }
 
-$oggi = new \DateTime();
+//$oggi = new \DateTime();
 //$oggi = new \DateTime('2017-12-31');
 
-$settimana = new Settimana($oggi);
+if($_GET['giorno']) {
+    $giorno = new \DateTime($_GET['giorno']);
+    $settimana = new Settimana($giorno);
+} else {
+    $settimana = new Settimana();
+}
+
 
 define('BR', "<br>\n");
 echo "Il lunedì è: ".$settimana->lunedi->format('d/m/Y').BR;
@@ -98,3 +118,7 @@ echo "Il giovedì è: ".$settimana->giovedi->format('d/m/Y').BR;
 echo "Il venerdì è: ".$settimana->venerdi->format('d/m/Y').BR;
 echo "Il sabato è: ".$settimana->sabato->format('d/m/Y').BR;
 echo "La domenica è: ".$settimana->domenica->format('d/m/Y').BR;
+?>
+
+<a href="temp.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>">settimana precedente</a>
+<a href="temp.php?giorno=<?= $settimana->lunediSuccessivo->format('Y-m-d') ?>">settimana successiva</a>
