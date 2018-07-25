@@ -50,3 +50,7 @@ body {
     color: white;
     background-color: teal;
 }
+
+.no-margin-bottom {
+    margin-bottom: 0rem;
+}

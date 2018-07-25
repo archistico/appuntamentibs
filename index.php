@@ -1,5 +1,12 @@
 <?php 
     require "php/app.php";
+
+    if(isset($_GET['giorno'])) {
+        $giorno = new \DateTime($_GET['giorno']);
+        $settimana = new Settimana($giorno);
+    } else {
+        $settimana = new Settimana();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +31,24 @@
         </div>
       -->
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1">
+                    <p class="font-weight-bold text-left no-margin-bottom"><a href="index.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>"><</a></p>
+                </div>
+                <div class="col-md-10">
+                    <p class="font-weight-bold text-center no-margin-bottom">Settimana dal <?= $settimana->lunedi->format('d/m/Y') ?> al <?= $settimana->domenica->format('d/m/Y') ?></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="font-weight-bold text-right no-margin-bottom"><a href="index.php?giorno=<?= $settimana->lunediSuccessivo->format('Y-m-d') ?>">></a></p>
+                </div>
+            </div>
             <!-- DIV CALENDARIO -->
             <div class="row">
                 <div class="col-md-3 p-1">
                     <table class="table table-bordered table-sm">
                         <thead>
-                            <tr>
-                                <th scope="col" colspan="3" class="tabella-giorno">Lunedì</th>
+                            <tr> 
+                                <th scope="col" colspan="3" class="tabella-giorno">Lunedì - <?= $settimana->lunedi->format('d/m/Y') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +80,7 @@
                     <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="3" class="tabella-giorno">Martedì</th>
+                                <th scope="col" colspan="3" class="tabella-giorno">Martedì - <?= $settimana->martedi->format('d/m/Y') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +112,7 @@
                     <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="3" class="tabella-giorno">Mercoledì</th>
+                                <th scope="col" colspan="3" class="tabella-giorno">Mercoledì - <?= $settimana->mercoledi->format('d/m/Y') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -125,7 +143,7 @@
                     <table class="table table-bordered table-sm">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="3" class="tabella-giorno">Venerdì</th>
+                                <th scope="col" colspan="3" class="tabella-giorno">Venerdì - <?= $settimana->venerdi->format('d/m/Y') ?></th>
                             </tr>
                         </thead>
                         <tbody>
