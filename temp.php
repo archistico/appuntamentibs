@@ -13,6 +13,14 @@ class Settimana {
     public $sabato;
     public $domenica;
 
+    public $lunediOggi;
+    public $martediOggi;
+    public $mercolediOggi;
+    public $giovediOggi;
+    public $venerdiOggi;
+    public $sabatoOggi;
+    public $domenicaOggi;
+
     public $giorno;
     public $giornoSettimana;
 
@@ -95,11 +103,56 @@ class Settimana {
             $this->domenica->sub(new DateInterval("P".$differenzagiornidomenica."D"));
         } else {
             $this->domenica->add(new DateInterval("P".abs($differenzagiornidomenica)."D"));
-        }        
+        }
+        
+        // Calcola il boolean se oggi è una delle date della settimana
+        $oggi = new \DateTime();
+
+        if($oggi->format('d/m/Y')==$this->lunedi->format('d/m/Y')) {
+            $this->lunediOggi = true;
+        } else {
+            $this->lunediOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->martedi->format('d/m/Y')) {
+            $this->martediOggi = true;
+        } else {
+            $this->martediOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->mercoledi->format('d/m/Y')) {
+            $this->mercolediOggi = true;
+        } else {
+            $this->mercolediOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->giovedi->format('d/m/Y')) {
+            $this->giovediOggi = true;
+        } else {
+            $this->giovediOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->venerdi->format('d/m/Y')) {
+            $this->venerdiOggi = true;
+        } else {
+            $this->venerdiOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->sabato->format('d/m/Y')) {
+            $this->sabatoOggi = true;
+        } else {
+            $this->sabatoOggi = false;
+        }
+
+        if($oggi->format('d/m/Y')==$this->domenica->format('d/m/Y')) {
+            $this->domenicaOggi = true;
+        } else {
+            $this->domenicaOggi = false;
+        }
     }
 }
 
-if($_GET['giorno']) {
+if(isset($_GET['giorno'])) {
     $giorno = new \DateTime($_GET['giorno']);
     $settimana = new Settimana($giorno);
 } else {
@@ -107,13 +160,13 @@ if($_GET['giorno']) {
 }
 
 define('BR', "<br>\n");
-echo "Il lunedì è: ".$settimana->lunedi->format('d/m/Y').BR;
-echo "Il martedì è: ".$settimana->martedi->format('d/m/Y').BR;
-echo "Il mercoledì è: ".$settimana->mercoledi->format('d/m/Y').BR;
-echo "Il giovedì è: ".$settimana->giovedi->format('d/m/Y').BR;
-echo "Il venerdì è: ".$settimana->venerdi->format('d/m/Y').BR;
-echo "Il sabato è: ".$settimana->sabato->format('d/m/Y').BR;
-echo "La domenica è: ".$settimana->domenica->format('d/m/Y').BR;
+echo "Il lunedì è: ".$settimana->lunedi->format('d/m/Y')." ".($settimana->lunediOggi?'Si':'No').BR;
+echo "Il martedì è: ".$settimana->martedi->format('d/m/Y')." ".($settimana->martediOggi?'Si':'No').BR;
+echo "Il mercoledì è: ".$settimana->mercoledi->format('d/m/Y')." ".($settimana->mercolediOggi?'Si':'No').BR;
+echo "Il giovedì è: ".$settimana->giovedi->format('d/m/Y')." ".($settimana->giovediOggi?'Si':'No').BR;
+echo "Il venerdì è: ".$settimana->venerdi->format('d/m/Y')." ".($settimana->venerdiOggi?'Si':'No').BR;
+echo "Il sabato è: ".$settimana->sabato->format('d/m/Y')." ".($settimana->sabatoOggi?'Si':'No').BR;
+echo "La domenica è: ".$settimana->domenica->format('d/m/Y')." ".($settimana->domenicaOggi?'Si':'No').BR;
 ?>
 
 <a href="temp.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>">settimana precedente</a>
