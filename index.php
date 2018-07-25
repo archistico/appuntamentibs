@@ -32,13 +32,13 @@
       -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-3 p-1">
                     <p class="font-weight-bold text-left navigazione"><a class="btn btn-sm btn-block btn-rect" href="index.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>"><</a></p>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-6 p-1">
                     <p class="font-weight-bold text-center navigazione">Settimana dal <?= $settimana->lunedi->format('d/m/Y') ?> al <?= $settimana->domenica->format('d/m/Y') ?></p>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-3 p-1">
                     <p class="font-weight-bold text-right navigazione"><a class="btn btn-sm btn-block btn-rect" href="index.php?giorno=<?= $settimana->lunediSuccessivo->format('Y-m-d') ?>">></a></p>
                 </div>
             </div>
