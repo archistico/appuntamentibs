@@ -99,16 +99,12 @@ class Settimana {
     }
 }
 
-//$oggi = new \DateTime();
-//$oggi = new \DateTime('2017-12-31');
-
 if($_GET['giorno']) {
     $giorno = new \DateTime($_GET['giorno']);
     $settimana = new Settimana($giorno);
 } else {
     $settimana = new Settimana();
 }
-
 
 define('BR', "<br>\n");
 echo "Il lunedì è: ".$settimana->lunedi->format('d/m/Y').BR;
