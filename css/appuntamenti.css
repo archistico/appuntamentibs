@@ -51,6 +51,7 @@ body {
     background-color: teal;
 }
 
-.no-margin-bottom {
-    margin-bottom: 0rem;
+.navigazione {
+    margin-top: 5px;
+    margin-bottom: 2px;
 }

@@ -33,13 +33,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-1">
-                    <p class="font-weight-bold text-left no-margin-bottom"><a href="index.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>"><</a></p>
+                    <p class="font-weight-bold text-left navigazione"><a class="btn btn-sm btn-block btn-rect" href="index.php?giorno=<?= $settimana->lunediPrecedente->format('Y-m-d') ?>"><</a></p>
                 </div>
                 <div class="col-md-10">
-                    <p class="font-weight-bold text-center no-margin-bottom">Settimana dal <?= $settimana->lunedi->format('d/m/Y') ?> al <?= $settimana->domenica->format('d/m/Y') ?></p>
+                    <p class="font-weight-bold text-center navigazione">Settimana dal <?= $settimana->lunedi->format('d/m/Y') ?> al <?= $settimana->domenica->format('d/m/Y') ?></p>
                 </div>
                 <div class="col-md-1">
-                    <p class="font-weight-bold text-right no-margin-bottom"><a href="index.php?giorno=<?= $settimana->lunediSuccessivo->format('Y-m-d') ?>">></a></p>
+                    <p class="font-weight-bold text-right navigazione"><a class="btn btn-sm btn-block btn-rect" href="index.php?giorno=<?= $settimana->lunediSuccessivo->format('Y-m-d') ?>">></a></p>
                 </div>
             </div>
             <!-- DIV CALENDARIO -->
