@@ -67,7 +67,7 @@
                                 <?php
                                     if(!$cognomenome): 
                                 ?>
-                                <td colspan="2"><button type="button" class="btn btn-info btn-sm btn-block btn-rect">+</button></td>
+                                <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
                                 <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
@@ -99,7 +99,7 @@
                                 <?php
                                     if(!$cognomenome): 
                                 ?>
-                                <td colspan="2"><button type="button" class="btn btn-info btn-sm btn-block btn-rect">+</button></td>
+                                <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
                                 <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
@@ -131,7 +131,7 @@
                                 <?php
                                     if(!$cognomenome): 
                                 ?>
-                                <td colspan="2"><button type="button" class="btn btn-info btn-sm btn-block btn-rect">+</button></td>
+                                <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
                                 <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
@@ -162,7 +162,7 @@
                                 <?php
                                     if(!$cognomenome): 
                                 ?>
-                                <td colspan="2"><button type="button" class="btn btn-info btn-sm btn-block btn-rect">+</button></td>
+                                <td colspan="2"><button type="button" class="btn btn-light btn-sm btn-block btn-rect">+</button></td>
                                 <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
